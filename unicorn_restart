@@ -1,0 +1,37 @@
+#!/bin/bash
+
+APP_HOME=`dirname $0`
+
+cd $APP_HOME
+UNICORN_BIN="bundle exec unicorn"
+RAILS_ENV=$1
+PHASE=$2
+
+if [[ -z $UNICORN_CONFIG ]]; then
+  UNICORN_CONFIG="config/unicorn.rb"
+fi
+
+if [[ -z $1 ]]; then
+  RAILS_ENV="production"
+fi
+
+export PHASE=$PHASE
+
+if [ -f $APP_HOME/../../shared/pids/unicorn.pid ]; then
+  UNICORN_PID=`cat $APP_HOME/../../shared/pids/unicorn.pid`
+  if [[ -n $UNICORN_PID ]]; then
+    kill -TERM $UNICORN_PID
+
+    while :
+    do
+      ps $UNICORN_PID &>/dev/null
+      if [[ $? != 0 ]]; then
+        break
+      fi
+      sleep 1
+    done
+  fi
+fi
+
+echo $UNICORN_BIN -c $UNICORN_CONFIG -E $RAILS_ENV -D
+eval $UNICORN_BIN -c $UNICORN_CONFIG -E $RAILS_ENV -D

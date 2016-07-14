@@ -1,0 +1,36 @@
+%p#notice= notice
+%h3 S2GRAPH
+#s2admin-contents-layout
+  .row
+    .col-md-12.btn-create
+      - if @authority == 'master'
+        = button_to 'CREATE SERVICE', new_service_path, class: "btn btn-primary", method: :get
+  .row
+    %div{class: "form-group pull-right"}
+      %input{type:"text", class:"search form-control", placeholder:"search"}
+    %span{class: "counter pull-right"}
+    %table.table.table-hover.tablesorter.results
+      %thead
+        %tr
+          %th ID
+          %th SERVICE NAME
+          %th ACCCESS TOKEN
+          %th HBASE TABLE NAME
+          %th PRE-SPLIT SIZE
+          %th HBASE TABLE TTL
+      %tbody
+        - @services.each do |service|
+          %tr{onClick: "location.href='/services/#{service.id}'", style: "cursor:pointer;"}
+            %td= service.id
+            %td= service.service_name
+            %td= service.access_token
+            %td= service.hbase_table_name
+            %td= service.pre_split_size
+            %td= service.hbase_table_ttl
+            / %td= link_to 'Show', service
+            / %td= link_to 'Edit', edit_service_path(service)
+            / %td= link_to 'Destroy', service, method: :delete, data: { confirm: 'Are you sure?' }
+  .row
+    .col-md-12.btn-create
+      - if @authority == 'master'
+        = button_to 'CREATE SERVICE', new_service_path, class: "btn btn-primary", method: :get

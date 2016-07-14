@@ -1,0 +1,87 @@
+// Place all the styles related to the Labels controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#s2admin-form-layout .form-wrap{
+  #notice-label-check{
+  	padding: 5px;
+  }
+  #label-check-wraper{
+  	width: 100%;
+  	text-align: right;
+  	margin-left: auto;
+  	margin-right: auto;
+  }
+  .add-prop-name{
+    width: 25%;
+  }
+  .add-prop-type{
+    width: 25%;
+  }
+  .add-prop-default{
+    width: 25%;
+  }
+
+  .form-radio{
+  	width: 70%;
+  }
+}
+
+#s2admin-form-layout {
+  
+  #index-name{
+    width: 200px;
+  }
+
+  #index-select{
+    label{
+      text-align: left;
+      margin-left: 10px;
+	  width: 100%;
+    }
+    input {
+      text-align: left;
+      width: 23px;
+    }
+  }	
+}
+
+#properties-table{
+	margin-top: 20px;
+	td {
+		font-size: 14px;
+	}
+}
+#indices-table{
+	margin-top: 40px;
+	td {
+		font-size: 14px;
+	}
+}
+
+#label-mode{
+  display: none;
+}
+
+#label-id{
+  display: none;
+}
+
+#label-detail-wrap{
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.label-below-btn{
+  margin-left: 10px;
+  width : 150px;
+}
+.label-detail-title{
+  font-size: 36px;
+  padding-top: 50px;
+}
+.label-each-column{
+  font-size: 16px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

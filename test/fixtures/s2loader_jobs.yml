@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  service: MyString
+  label: MyString
+  schedule: MyString
+  input_dir: MyString
+  test_column: MyString
+  test_id: MyString
+  description: MyString
+
+two:
+  service: MyString
+  label: MyString
+  schedule: MyString
+  input_dir: MyString
+  test_column: MyString
+  test_id: MyString
+  description: MyString

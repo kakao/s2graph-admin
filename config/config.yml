@@ -1,0 +1,21 @@
+defaults: &default
+  s2graph_url: 'http://localhost:9000'
+  s2graph_query_url: 'http://localhost:9000'
+  cluster: 'localhost'
+  compression_algorithm: 'gz'
+  email_postfix: '@yourcompany.com'
+
+alpha: &alpha
+  <<: *default
+
+development:
+  <<: <%= ENV['PHASE'] == "alpha" ? "*alpha" : "*default" %>
+
+test:
+  <<: *default
+
+staging:
+  <<: *default
+
+production:
+  <<: *default

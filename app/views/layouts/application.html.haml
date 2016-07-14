@@ -1,0 +1,64 @@
+!!!
+%html
+  %head
+    %title S2Graph Admin
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
+      = javascript_include_tag 'application'
+      = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js'
+      = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/fetch/0.9.0/fetch.min.js'
+      = javascript_include_tag '//code.highcharts.com/highcharts.js'
+      = javascript_include_tag '//code.highcharts.com/modules/exporting.js'
+
+      = csrf_meta_tags
+      = stylesheet_link_tag 'application'
+  %body
+    #cover
+    #contents
+      #custom-bootstrap-menu.navbar.navbar-default.navbar-fixed-top{:role => "navigation"}
+        .container-fluid
+          .navbar-header
+            %a.navbar-brand{:href => "#"}
+              = image_tag('s2graph_logo_basic.png')
+            %button.navbar-toggle{"data-target" => ".navbar-menubuilder", "data-toggle" => "collapse", :type => "button"}
+              %span.sr-only Toggle navigation
+              %span.icon-bar
+              %span.icon-bar
+              %span.icon-bar
+          .collapse.navbar-collapse.navbar-menubuilder
+            %ul.nav.navbar-nav.navbar-left
+              - if !session[:user_id].nil?
+                %li{:class => "#{@active == 's2graph' ? 'active' : ''}"}
+                  %a{:href => "/s2graph"} S2GRAPH
+                - if session[:authority] == "master"
+                  %li{:class => "#{@active == 'counter' ? 'active' : ''}"}
+                    %a{:href => "/s2counter"} S2COUNTER
+                %li{:class => "#{@active == 's2ab' ? 'active' : ''}"}
+                  %a{:href => "/s2ab", } S2AB
+                %li{:class => "#{@active == 'query' ? 'active' : ''}"}
+                  %a{:href => "/queries/visualize", } QUERY
+                - if session[:authority] == "master"
+                  %li.dropdown{:class => "#{@active == 'admin' ? 'active' : ''}"}
+                    %a.dropdown-toggle{href: "#", "data-toggle" => "dropdown", "role" => "button", "aria-haspopup"=> "true", "aria-expanded" => "false", :class => "#{@active == 'admin' ? 'active' : ''}"}
+                      ADMIN
+                      %span.caret
+                    %ul.dropdown-menu
+                      %li
+                        %a{:href => "/users"} USERS
+                      %li
+                        %a{:href => "/access"} ACCESS
+
+
+            - if session[:user_id] != nil
+              %ul.nav.navbar-nav.navbar-right
+                %li
+                  = link_to "LOG OUT", logout_url, :method => :delete
+            - else
+              %ul.nav.navbar-nav.navbar-right
+                %li
+                  = link_to "LOG IN", login_url, :method => :get
+
+      .container
+        = yield
+
+    #footer
+      = render "layouts/footer"

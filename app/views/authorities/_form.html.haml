@@ -1,0 +1,8 @@
+= simple_form_for @authority, html: { name: "authority-form", onsubmit: "return validateAuthorityForm()"} do |f|
+	= f.error_notification
+	.form-wrap
+		.form-inputs.form
+			= f.association :user, collection: User.order(:email), label_method: :email, value_method: :id, :label => "e-mail", required: true
+			= f.association :service, collection: Service.order(:service_name), label_method: :service_name, value_method: :id, :label => "service name", required: true
+		.form-actions
+			= f.button :submit, :class => 'btn btn-primary'

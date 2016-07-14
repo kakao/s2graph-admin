@@ -1,0 +1,311 @@
+// Place all the styles related to the Experiments controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+pre {
+  padding: 5px;
+  margin: 5px;
+  text-align: left;
+}
+
+pre .string {
+  color: green;
+}
+
+pre .number {
+  color: darkorange;
+}
+
+pre .boolean {
+  color: blue;
+}
+
+pre .null {
+  color: magenta;
+}
+
+pre .key {
+  color: red;
+}
+
+.contents-div {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-left: 10px;
+  font-size: 16px;
+}
+
+.contents-div form input {
+  margin-right: 5px;
+}
+
+.action_types select {
+  display: inline-block;
+}
+
+#floatMenu {
+  position: absolute;
+  top: 85%;
+  margin-left: 1000px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  behavior: url(PIE.htc);
+  background: #FFDC47;
+  cursor: pointer;
+  z-index: 9999;
+  color: black;
+}
+
+#floatMenu div {
+  margin-top: 50px;
+  text-align: center;
+  font-weight: bold;
+}
+
+#s2admin-contents-layout .test-contents-header {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: bold;
+  background-color: #e7e7e7;
+  color: black;
+  text-align: left;
+  border-radius: 5px;
+  background: #fff;
+  background: -moz-linear-gradient(#fff, #999);
+  background: -webkit-linear-gradient(#fff, #999);
+  background: -o-linear-gradient(#fff, #999);
+}
+
+#s2admin-contents-layout .test-contents-body {
+
+}
+
+#s2admin-contents-layout .contents-value {
+  font-size: 14px;
+}
+
+#s2admin-contents-layout .experiment-border {
+  margin-bottom: 20px;
+}
+
+#s2admin-contents-layout {
+  width: 100%;
+}
+
+#experiment-title {
+  font-size: 24px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+#experiment-id {
+  display: none;
+}
+
+#experiment-modify {
+  color: #2196f3;
+  cursor: pointer;
+}
+
+#experiment-delete {
+  color: #e51c23;
+  cursor: pointer;
+}
+
+.experiment-div {
+
+  margin-bottom: 10px;
+}
+
+#s2admin-contents-layout .bucket-div {
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid black;
+  color: black;
+}
+
+.panel-heading {
+  border-radius: 3px;
+}
+
+.panel-group {
+  margin-top: 5px;
+}
+
+.panel-body {
+  padding: 0px;
+  border-radius: 3px;
+}
+
+.panel-body table tr td {
+  padding-left: 15px
+}
+
+.panel-body .table {
+  margin-bottom: 0px;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+#experimet-contents {
+  padding-left: 0px;
+  padding-right: 15px;
+}
+
+#experimet-contents-inner {
+  border: 1px solid black;
+  border-radius: 3px;
+  margin-top: 5px;
+  padding: 15px;
+}
+
+#btn-create-bucket {
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+#btn-create-test {
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+.table tbody tr td {
+  font-size: 12px;
+}
+
+.table tbody tr td {
+  font-size: 14px;
+}
+
+#readme-s2ab {
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+#guide-s2ab {
+  font-size: 14px;
+}
+
+a {
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.bucket-modify {
+  color: #2196f3;
+  cursor: pointer;
+  font-size: 20px;
+  a:visited {
+    color: #2196f3;
+  }
+  a:hover {
+    color: #2196f3;
+  }
+}
+
+.bucket-delete {
+  color: #e51c23;
+  cursor: pointer;
+  font-size: 20px;
+  a:visited {
+    color: #e51c23;
+  }
+  &a:hover {
+    color: #e51c23;
+  }
+}
+
+#bucket-modify .modal-content {
+
+}
+
+#bucket-modify label {
+  text-align: right;
+  width: 300px;
+  font-size: 14px;
+}
+
+#bucket-modify input {
+  width: 100px;
+  margin-left: 20px;
+}
+
+.display-inline-block {
+  display: inline-block;
+}
+
+.center {
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  width: 575px;
+  background-color: white;
+  text-align: center;
+}
+
+#range {
+  height: 35px;
+  color: #ffffff;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+#slider:before {
+  margin-left: 9px;
+  width: 560px;
+  height: 30px;
+  content: ""
+}
+
+.bucket:before {
+  content: "";
+  display: block;
+}
+
+.bucket {
+  font-size: 15px;
+}
+
+.bucket-0 {
+  background-color: rgba(229, 28, 35, 0.6);
+}
+
+.bucket-1 {
+  background-color: rgba(255, 152, 0, 0.6);
+}
+
+.bucket-2 {
+  background-color: rgba(76, 175, 80, 0.6);
+}
+
+.bucket-3 {
+  background-color: rgba(33, 150, 243, 0.6);
+}
+
+.bucket-4 {
+  background-color: rgba(156, 39, 176, 0.6);
+}
+
+#range td {
+  border: none;
+}
+
+.rangeGrip {
+  width: 12px;
+  height: 5px;
+  cursor: e-resize;
+  background-image: url(asset-path('slider.png'));
+  background-position: bottom right;
+}
+
+.rangeDrag .rangeGrip, .rangeGrip:hover {
+  //background-position:right;
+}
+
+#text {
+  color: #034a92;
+  float: right;
+}

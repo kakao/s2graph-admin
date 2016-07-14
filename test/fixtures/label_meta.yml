@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  label_id: 
+  name: MyString
+  seq: 1
+  default_value: MyString
+  data_type: MyString
+  used_in_index: 1
+
+two:
+  label_id: 
+  name: MyString
+  seq: 1
+  default_value: MyString
+  data_type: MyString
+  used_in_index: 1

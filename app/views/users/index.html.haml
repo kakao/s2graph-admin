@@ -1,0 +1,28 @@
+%p#notice= notice
+%h3 USERS
+.col-md-12.btn-create
+  = button_to 'CREATE USER', new_user_path, class: "btn btn-primary", method: :get
+.row
+  %div{class: "form-group pull-right"}
+    %input{type:"text", class:"search form-control", placeholder:"search"}
+  %span{class: "counter pull-right"}
+  %table.table.table-hover.tablesorter.results
+    %thead
+      %tr
+        %th ID
+        %th E-MAIL
+        %th AUTHORITY
+        %th
+        %th
+
+    %tbody
+      - @users.each do |user|
+        %tr
+          %td= user.id
+          %td= user.email
+          %td= user.authority
+          %td= link_to '', edit_user_path(user), class: "glyphicon glyphicon-pencil bucket-modify"
+          %td= link_to '', user, class: "glyphicon glyphicon-trash bucket-delete",:method => :delete, :data => { :confirm => 'Are you sure?' }
+.row
+.col-md-12.btn-create
+  = button_to 'CREATE USER', new_user_path, class: "btn btn-primary", method: :get

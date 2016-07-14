@@ -1,0 +1,36 @@
+.col-md-4
+	.row
+		%label API PATH
+		%input#query-api-path-input{type: "text", value: "#{@api_path.presence || @graph_url}", class: "form-control", disabled: "disabled"} 
+		- selectOption = [["PLEASE SELECT SERVICE", "PLEASE SELECT SERVICE"]]
+		= select("query", "service", selectOption+ Service.all.order(:service_name).collect {|s| [ s.service_name, s.id ] }, {disabled: "PLEASE SELECT SERVICE", selected: "PLEASE SELECT SERVICE"}, {class: "select form-control"})
+		= select("query", "column", ["SELECT SERVICE FIRST", "SELECT SERVICE FIRST"], {disabled: "SELECT SERVICE FIRST", selected: "SELECT SERVICE FIRST"}, {class: "select form-control"})
+		%input{type: "text", id: "query_id", class: "form-control"}
+		.query-btn-wrapper
+			%button#btn-traversal.btn-sm.btn-primary START TRAVERSAL
+			%button#btn-clear.btn-sm.btn-primary CLEAR
+	%hr
+	.row.query-api-path-div
+		%label API PATH
+		%input#query-api-path-input{type: "text", value: "#{@api_path.presence || @graph_url}", class: "form-control"} 
+		.query-btn-wrapper
+			%button#btn-get-graph.btn.btn-sm.btn-primary GET GRAPH
+	.row.query-request-body-div
+		%div#query-request-body-label REQUEST BODY
+		%textarea#query-request-body-input{placeholder: "Input request body."} #{@graph_query}
+
+.col-md-8	
+	#graph
+	.col-md-6
+		%h4 hover edge
+		%pre#hover-properties
+	.col-md-6
+		%h4 select edge
+		%pre#select-properties
+.row.hidden#graph-result
+	- if !@graph_result.presence.nil?
+		= @graph_result.html_safe
+
+
+%script{ :type => 'text/javascript' }
+	var columns = #{@grouped.to_json.html_safe};

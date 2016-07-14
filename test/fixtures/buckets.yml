@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  experiment_id: 
+  uuid_mods: MyString
+  traffic_ratios: MyString
+  http_verb: MyString
+  api_path: MyText
+  uuid_key: MyString
+  uuid_placeholder: MyString
+  request_body: MyText
+  timeout: 1
+  impression_id: 
+  is_graph_query: 1
+
+two:
+  experiment_id: 
+  uuid_mods: MyString
+  traffic_ratios: MyString
+  http_verb: MyString
+  api_path: MyText
+  uuid_key: MyString
+  uuid_placeholder: MyString
+  request_body: MyText
+  timeout: 1
+  impression_id: 
+  is_graph_query: 1

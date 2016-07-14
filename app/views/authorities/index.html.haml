@@ -1,0 +1,27 @@
+%p#notice= notice
+%h3 ACCESS
+.col-md-12.btn-create
+  = button_to 'CREATE ACCESS', new_authority_path, class: 'btn btn-primary', method: :get
+.row
+  %div{class: 'form-group pull-right'}
+    %input{type:'text', class:'search form-control', placeholder:'search'}
+  %span{class: 'counter pull-right'}
+  %table.table.table-hover.tablesorter.results
+    %thead
+      %tr
+        %th ID
+        %th USER
+        %th SERVICE
+        %th
+        %th
+
+    %tbody
+      - @authorities.each do |authority|
+        %tr
+          %td= authority.id
+          %td= authority.email
+          %td= authority.service_name
+          %td= link_to '', edit_authority_path(authority), class: 'glyphicon glyphicon-pencil bucket-modify'
+          %td= link_to '', authority, :method => :delete, class: 'glyphicon glyphicon-trash bucket-delete', :data => { :confirm => 'Are you sure?' }
+.col-md-12.btn-create
+  = button_to 'CREATE ACCESS', new_authority_path, class: 'btn btn-primary', method: :get

@@ -1,0 +1,24 @@
+%p#notice= notice
+.s2admin-content-layout
+  %p
+    %strong service id:
+    = @experiment.service_id
+  %p
+    %strong service name:
+    = @experiment.service_name
+  %p
+    %strong name:
+    = @experiment.name
+  %p
+    %strong description:
+    = @experiment.description
+  %p
+    %strong type:
+    = @experiment.experiment_type
+  %p
+    %strong total modular:
+    = @experiment.total_modular
+  .s2admin-content-layout
+    = link_to 'Edit', edit_experiment_path(@experiment)
+    |
+    \#{link_to 'Back', s2ab_path}

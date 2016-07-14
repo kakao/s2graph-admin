@@ -1,0 +1,61 @@
+%p#notice= notice
+%div#s2admin-contents-layout
+  %div#label-detail-wrap
+    .row.label-detail-title
+      %strong label:
+      = @label.label
+    %hr
+    .row.label-each-column
+      %strong src service:
+      = @label.src_service_id
+    .row.label-each-column
+      %strong src column name:
+      = @label.src_column_name
+    .row.label-each-column
+      %strong src column type:
+      = @label.src_column_type
+    %hr
+    .row.label-each-column
+      %strong tgt service:
+      = @label.tgt_service_id
+    .row.label-each-column
+      %strong tgt column name:
+      = @label.tgt_column_name
+    .row.label-each-column
+      %strong tgt column type:
+      = @label.tgt_column_type
+    %hr
+    .row.label-each-column
+      %strong is directed:
+      = @label.is_directed
+    .row.label-each-column
+      %strong service name:
+      = @label.service_name
+    .row.label-each-column
+      %strong service:
+      = @label.service_id
+    .row.label-each-column
+      %strong consistency level:
+      = @label.consistency_level
+    .row.label-each-column
+      %strong hbase table name:
+      = @label.hbase_table_name
+    .row.label-each-column
+      %strong hbase table ttl:
+      = @label.hbase_table_ttl
+    .row.label-each-column
+      %strong schema version:
+      = @label.schema_version
+    .row.label-each-column
+      %strong is async:
+      = @label.is_async
+    .row.label-each-column
+      %strong compressionalgorithm:
+      = @label.compressionAlgorithm
+    %hr
+    .row.label-each-column
+      %pre.contents-value.json-body= JSON.pretty_generate(LabelMetum.where(label_id: @label.id).as_json)
+    %hr
+    .row
+      = button_to 'EDIT', edit_label_path(@label), class: "btn btn-primary pull-right label-below-btn", method: :get
+      = button_to 'BACK', service_path(@label.service_id), class: "btn btn-warning pull-right label-below-btn", method: :get

@@ -1,0 +1,246 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require syntax-highlighter-rails/shCore
+ *= require syntax-highlighter-rails/shThemeDefault
+ *= require_tree .
+ *= require_self
+ *= require counters
+ *= require bootstrap-datepicker3
+
+  */
+@import 'bootstrap/glyphicons';
+#cover {
+  position: absolute;
+  z-index: 1040; /* make sure logout_box has a z-index of 2 */
+  background-color: black;
+  top: 0px;
+  left: 0px;
+  opacity: 0.2;
+  display: none;
+}
+
+.navbar-brand{
+  img {
+    height : 100%;
+  }
+}
+
+.hidden-element {
+  display: none;
+}
+
+.inline-block-element {
+  display: inline-block;
+}
+
+.container{
+  padding-top: 20px;
+}
+
+body{
+
+}
+
+.json-body{
+  font-size: 14px;
+}
+
+#s2admin-contents-layout a{
+  color: #333333;
+}
+#s2admin-contents-layout a:hover{
+  text-decoration: none;
+}
+
+#s2admin-contents-layout a:visited{
+  color: #333333;
+  background-color: #ffffff;
+  opacity: 0.0;
+}
+
+.navbar-fixed-top {
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  border-radius: 0;
+}
+
+#contents{
+  //background-color: #e7e7e7
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 60px;
+}
+
+#contents .cursor-hand{
+  cursor: pointer;
+
+}
+.container{
+  margin-top: 20px;
+  width: 90%;
+}
+.container h3{
+  text-align: center;
+}
+
+#h3-left{
+  text-align: left;
+}
+
+#s2admin-form-layout{
+  width: 100%;
+  padding: 20px;
+  margin: auto;
+  text-align: center;
+}
+
+#s2admin-form-layout .form-group{
+  margin-left: auto;
+  margin-right: auto;
+  }
+
+#s2admin-form-layout .top{
+  vertical-align: top;
+}
+
+.form-wrap{
+  width: 40%;
+  min-width: 550px;
+  margin-left: auto;
+  margin-right: auto;  
+}
+
+.form{
+  input{
+    width: 70%;
+  }
+  .checkbox{
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .boolean {
+    width: auto;
+    text-align: left;
+  }
+
+  select{
+    width: 70%;
+  }
+  textarea{
+    width: 70%;
+  }
+  .textarea-xl{
+    height: 40em;
+  }
+  abbr[title]{
+      color: red;
+      border-bottom: none;
+  }
+  .width-40{
+    width: 200px;
+  }
+  .form-radio{
+    width: 70%;
+    display: inline-block;
+    height: 20px;
+    text-align: left;
+    input{
+        width: 20px;
+    }
+  }
+  label{
+    text-align: right;
+    margin: 2px 10px;
+    width: 25%;
+  }
+}
+
+
+#s2admin-form-layout .input-alert{
+  box-shadow: inset 0 -2px 0 #e51c23;
+}
+
+#s2admin-form-layout .form-control{
+  display: inline-block;
+}
+
+#s2admin-form-layout .form-actions{
+  input{
+    width: 100px;
+  }
+  margin-top: 60px;
+  margin-left: 0px;
+}
+#s2admin-form-layout .span-bold{
+  border-left: 4px solid #666666;
+  font-weight: bold;
+}
+
+.blank-span{
+  width: 20px;
+  display: inline-block;
+}
+
+#footer
+{
+  text-align: center;
+  height: 150px;
+}
+
+.btn-create {
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+/*
+ * for table search
+*/
+.results tr[visible='false'],
+.no-result{
+  display:none;
+}
+
+.results tr[visible='true']{
+  display:table-row;
+}
+
+.counter{
+  padding:8px;
+  color:#ccc;
+}
+
+.width-30{
+  width: 30px;
+}
+
+.width-40{
+  width: 40px;
+}
+
+.width-50{
+  width: 50px;
+}
+
+.height-38{
+  height: 38px;
+}
+
+table thead tr {
+  cursor: pointer;
+}
+
+/*
+ *= require bootstrap-multiselect
+*/

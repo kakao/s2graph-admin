@@ -1,0 +1,124 @@
+%p#notice= notice
+%div{:class => "row"}
+  .col-md-12
+    .row
+      .col-md-12#service-title
+        %span
+          = @service.service_name
+        %span{id: "service-id"}
+          = @service.id
+    %hr
+    .row.service-div
+      .row
+        .col-md-12.contents-div
+          - if @service.access_token.nil?
+            %div{class: "access-token-warning", role: "alert"} access_token is missing.
+            %button{type: "button", class: "btn btn-primary btn-sm", id: "gen-access-token", "data-toggle" => "modal", "data-target" => "#gen-access-token-modal"} generate
+          -else
+            access token : #{@service.access_token}
+          %div{id: "gen-access-token-modal", class: "modal fade", "role" => "dialog"}
+            %div{class: "modal-dialog modal-sm modal-access-token"}
+              %div{class: "modal-content"}
+                %div{class: "modal-header"}
+                  %h6{class: "modal-title"}Generate ACCESS_TOKEN
+                %div{class: "modal-body"}
+                  %div{id: "uuid"}
+                %div{class: "modal-footer"}
+                  %button{type: "button", class: "btn btn-primary btn-sm", id: "btn-save-access-token"}Save
+                  %button{type: "button", class: "btn btn-default btn-sm", "data-dismiss" => "modal"}Close
+      .row
+        .col-md-12.contents-div cluster : #{@service.cluster}
+      .row
+        .col-md-12.contents-div hbase table name : #{@service.hbase_table_name}
+      .row
+        .col-md-12.contents-div pre split size : #{@service.pre_split_size}
+      .row
+        .col-md-12.contents-div hbase table ttl : #{@service.hbase_table_ttl}
+      .row
+        .col-md-12.contents-div
+          %button{type: "button", class: "btn btn-primary btn-sm", id: "btn-show-create-service", "data-toggle" => "modal", "data-target" => "#show-create-service-modal"} SHOW CREATE SERVICE & LABELS
+          %div{id: "show-create-service-modal", class: "modal fade", "role" => "dialog"}
+            %div{class: "modal-dialog modal-lg modal-create-service"}
+              %div{class: "modal-content"}
+                %div{class: "modal-header"}
+                  %h6{class: "modal-title"} SHOW CREATE SERVICE & LABELS
+                %div{class: "modal-body"}
+                  %pre #{@createCURLs}
+                %div{class: "modal-footer"}
+                  %button{type: "button", class: "btn btn-default btn-sm", "data-dismiss" => "modal"}Close
+    %hr
+    .row
+      .col-md-12.btn-create
+        = button_to 'CREATE LABEL', new_label_path, class: "btn btn-primary", method: :get
+    .row
+      %div{class: "form-group pull-right"}
+        %input{type:"text", class:"search form-control", placeholder:"search"}
+      %span{class: "counter pull-right"}
+      %table.table.table-hover.tablesorter.results
+        %thead
+          %tr
+            %th{rowspan: 2} ID
+            %th{rowspan: 2} LABEL NAME
+            %th{colspan: 3} SOURCE
+            %th{colspan: 3} TARGET
+            %th{rowspan: 2} IS DIRECTED
+            %th{rowspan: 2} HBASE TABLE NAME
+            %th{rowspan: 2} HBASE TABLE TTL
+            %th{rowspan: 2} META
+            %th{rowspan: 2} INDEX
+            %th{rowspan: 2} ADD PROPS&INDICES
+          %tr
+            %th SERVICE
+            %th COL NAME
+            %th COL TYPE
+            %th SERVICE
+            %th COL NAME
+            %th COL TYPE
+
+        %tbody
+          - services = Service.all
+          - metas = LabelMetum.where(label_id: @labels).order(id: :asc)
+          - indices = LabelIndex.where(label_id: @labels).order(id: :asc)
+          - for label in @labels
+            %tr
+              %td{onClick: "location.href='/labels/#{label.id}'", style: "cursor:pointer;"}= label.id
+              %td{onClick: "location.href='/labels/#{label.id}'", style: "cursor:pointer;"}= label.label
+              %td{onClick: "location.href='/labels/#{label.id}'", style: "cursor:pointer;"}= services.find(label.src_service_id).service_name
+              %td{onClick: "location.href='/labels/#{label.id}'", style: "cursor:pointer;"}= label.src_column_name
+              %td{onClick: "location.href='/labels/#{label.id}'", style: "cursor:pointer;"}= label.src_column_type
+              %td{onClick: "location.href='/labels/#{label.id}'", style: "cursor:pointer;"}= services.find(label.tgt_service_id).service_name
+              %td{onClick: "location.href='/labels/#{label.id}'", style: "cursor:pointer;"}= label.tgt_column_name
+              %td{onClick: "location.href='/labels/#{label.id}'", style: "cursor:pointer;"}= label.tgt_column_type
+              %td{onClick: "location.href='/labels/#{label.id}'", style: "cursor:pointer;"}= label.is_directed
+              %td{onClick: "location.href='/labels/#{label.id}'", style: "cursor:pointer;"}= label.hbase_table_name
+              %td{onClick: "location.href='/labels/#{label.id}'", style: "cursor:pointer;"}= label.hbase_table_ttl
+              %td
+                %button{type: "button", class: "btn btn-warning btn-sm", "data-toggle" => "modal", "data-target" => "##{label.label}-meta"} meta
+              %td
+                %button{type: "button", class: "btn btn-success btn-sm", "data-toggle" => "modal", "data-target" => "##{label.label}-index"} index
+              %td
+                =link_to "add prop&indices", edit_label_path(label), class: "btn btn-primary btn-sm"
+                / %link_to{type: "button", class: "btn btn-primary btn-sm"}
+      .row
+        .col-md-12.btn-create
+          = button_to 'CREATE LABEL', new_label_path, class: "btn btn-primary", method: :get
+  - for label in @labels
+    %div{id: "#{label.label}-meta", class: "modal fade", "role" => "dialog"}
+      %div{class: "modal-dialog modal-lg"}
+        %div{class: "modal-content"}
+          %div{class: "modal-header"}
+            %h4{class: "modal-title"}META
+          %div{class: "modal-body"}
+            %pre.contents-value.json-body= JSON.pretty_generate(metas.where(label_id: label.id).as_json)
+          %div{class: "modal-footer"}
+            %button{type: "button", class: "btn btn-default", "data-dismiss" => "modal"}Close
+  - for label in @labels
+    %div{id: "#{label.label}-index", class: "modal fade", "role" => "dialog"}
+      %div{class: "modal-dialog modal-lg"}
+        %div{class: "modal-content"}
+          %div{class: "modal-header"}
+            %h4{class: "modal-title"}INDEX
+          %div{class: "modal-body"}
+            %pre.contents-value.json-body= JSON.pretty_generate(indices.where(label_id: label.id).as_json)
+          %div{class: "modal-footer"}
+            %button{type: "button", class: "btn btn-default", "data-dismiss" => "modal"}Close

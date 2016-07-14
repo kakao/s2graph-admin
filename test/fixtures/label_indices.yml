@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  label_id: 
+  name: MyString
+  seq: 1
+  meta_seqs: MyString
+  formulars: MyString
+
+two:
+  label_id: 
+  name: MyString
+  seq: 1
+  meta_seqs: MyString
+  formulars: MyString

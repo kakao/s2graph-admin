@@ -1,0 +1,16 @@
+%div#log-in
+  - if flash[:alert]
+    %p#notice= flash[:alert]
+  = form_tag do
+    %fieldset
+      %h4 Please Log In
+      .form-group
+        %span
+        = label_tag :email, 'E-mail', class: "control-label"
+        %span
+          = text_field_tag :email, params[:email], class: "form-control input-sm", :value => '@kakaocorp.com'
+        = label_tag :password, 'Password', class: "control-label"
+        %span
+          = password_field_tag :password, params[:password], class: "form-control input-sm"
+        .row.btn-login
+          = submit_tag "Login", class: "form-contorl btn btn-sm"

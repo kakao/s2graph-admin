@@ -1,0 +1,50 @@
+%p#notice= notice
+#s2admin-contents-layout
+  .row
+    .col-md-12.btn-create
+      = button_to 'CREATE LABEL', new_label_path, class: "btn btn-primary", method: :get
+  .row
+    %div{class: "form-group pull-right"}
+      %input{type:"text", class:"search form-control", placeholder:"search"}
+    %span{class: "counter pull-right"}
+    %table.table.table-hover.results
+      %thead
+        %tr
+          %th LABEL
+          %th SRC SERVICE
+          %th SRC COLUMN NAME
+          %th SRC COLUMN TYPE
+          %th TGT SERVICE
+          %th TGT COLUMN NAME
+          %th TGT COLUMN TYPE
+          %th IS DIRECTED
+          %th SERVICE NAME
+          %th SERVICE
+          %th CONSISTENCY LEVEL
+          %th HBASE TABLE NAME
+          %th HBASE TABLE TTL
+          %th SCHEMA VERSION
+          %th IS ASYNC
+          %th COMPRESSIOIN ALGORITHM
+      %tbody
+        - @labels.each do |label|
+          %tr{onClick: "location.href='/labels/#{label.id}'", style: "cursor:pointer;"}
+            %td= label.label
+            %td= label.src_service_id
+            %td= label.src_column_name
+            %td= label.src_column_type
+            %td= label.tgt_service_id
+            %td= label.tgt_column_name
+            %td= label.tgt_column_type
+            %td= label.is_directed
+            %td= label.service_name
+            %td= label.service_id
+            %td= label.consistency_level
+            %td= label.hbase_table_name
+            %td= label.hbase_table_ttl
+            %td= label.schema_version
+            %td= label.is_async
+            %td= label.compressionAlgorithm
+  .row
+    .col-md-12.btn-create
+      = button_to 'CREATE LABEL', new_label_path, class: "btn btn-primary", method: :get

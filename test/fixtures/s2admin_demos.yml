@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  service_name: MyString
+  description: MyString
+  query: MyText
+  default_id: MyString
+  content_type: MyString
+  timestamp: 2015-11-04 11:29:13
+  type: 
+  src_type: MyString
+
+two:
+  service_name: MyString
+  description: MyString
+  query: MyText
+  default_id: MyString
+  content_type: MyString
+  timestamp: 2015-11-04 11:29:13
+  type: 
+  src_type: MyString

@@ -1,0 +1,24 @@
+= simple_form_for @experiment, html: { name: 'experiment-form', onsubmit: 'return validateExperimentForm()'} do |f|
+  = f.error_notification
+  .form-wrap
+    .form-inputs.form
+      - user = User.find(session[:user_id])
+      - if user.authority != 'master' then
+        = f.association :service, collection: Service.where(id: Authority.where(user_id: session[:user_id]).select('service_id')).order(:service_name), label_method: :service_name, value_method: :id, label: 'service name', required: true
+      - else
+        = f.association :service, collection: Service.order(:service_name), label_method: :service_name, value_method: :id, label: 'service name', required: true
+      = f.input :name, label: 'name', required: true
+      = f.input :description, label: 'description', required: true
+      .form-group.string.optional.experiment_type
+        %label.string.optional.control-label{for: 'experiment_type'}
+          %abbr{:title => 'required'} *
+          experiment type
+        .form-radio
+          - uType = if @experiment.experiment_type == 'u' then 'checked=checked' end
+          - tType = if @experiment.experiment_type == 't' then 'checked=checked' end
+          %input#experiment_experiment_type_u{type: 'radio', value: 'u', 'checked' => uType, name: 'experiment[experiment_type]'} uuid
+          %span.blank-span
+          %input#experiment_experiment_type_u{type: 'radio', value: 't', 'checked' => tType, name: 'experiment[experiment_type]'} traffic
+      = f.input :total_modular, label: 'total modular', required: true
+    .form-actions
+      = f.button :submit, class: 'btn btn-primary'

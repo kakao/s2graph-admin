@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  service_id: 
+  service_name: MyString
+  name: MyString
+  description: MyString
+  experiment_type: MyString
+  total_modular: 1
+
+two:
+  service_id: 
+  service_name: MyString
+  name: MyString
+  description: MyString
+  experiment_type: MyString
+  total_modular: 1

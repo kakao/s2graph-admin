@@ -1,0 +1,142 @@
+= simple_form_for @label, method: :post, html: { id: "editing_label", name: "label-form", onsubmit: "return preSubmitForEdit()"} do |f|
+  = f.error_notification
+  %span#label-mode edit
+  %span#label-id= @label.id
+  %span.hidden-element#phase
+    = Rails.application.config.phase
+  - types = ["string", "integer", "long", "float", "boolean"]
+  .form-wrap
+    .form-inputs.form
+      = f.input :label, label: "label name", required: true, :disabled => true
+      %div#label-check-wraper
+      = f.association :service, :label => "src service", :label_method => :service_name, :value_method => :id, input_html: { name: 'label[src_service_id]'}, required: true, :disabled => true
+      = f.input :src_column_name, label: "src column name", required: true, :disabled => true
+      = f.input :src_column_type, collection: types, label: "src column type", required: true, :disabled => true
+
+      = f.association :service, :label => "tgt service", :label_method => :service_name, :value_method => :id, input_html: { name: 'label[tgt_service_id]'}, required: true, :disabled => true
+      = f.input :tgt_column_name, label: "tgt column name", required: true, :disabled => true
+      = f.input :tgt_column_type, collection: types, label: "tgt column type", required: true, required: true
+      - if (!@selected_service_name.nil? && @selected_service_name != '')
+        = f.input :service, :label => "service", :disabled => true, input_html: { value: @selected_service_name, name: 'service_id]'}, required: true
+        = f.input :service, as: :hidden, input_html: { value: @selected_service_name, name: 'label[service_id]'}, :disabled => true
+      - else
+        = f.association :service, :label => "service", :label_method => :service_name, :value_method => :id, required: true, :disabled => true
+      %hr
+      %h4 properties & indices
+      %table.table.table-hover#properties-table
+        %thead
+          %th PROPERTY NAME
+          %th SEQ
+          %th PROPERTY TYPE
+          %th DEFAULT VALUE
+          %th
+        %tbody
+          - if !@metas.nil? then
+            - @metas.each do |meta|
+              %tr
+                %td
+                  = meta.name
+                %td
+                  = meta.seq
+                %td
+                  = meta.data_type
+                %td
+                  = meta.default_value
+                %td
+
+      %input{type: "text", placeholder: "property name", class: "add-prop-name height-38", id: "property-name"}
+      = select_tag :propertyType, options_for_select([''].concat(types), params[:propertyType]), {class: "add-prop-type select form-control", id: "property-type"}
+      %input{type: "text", placeholder: "default value", class: "add-prop-default height-38", id: "property-default-value"}
+      %span
+        %button{ id: "btn-label-add-prop", class: "btn btn-sm btn-primary" } add property
+      %table.table.table-hover#indices-table
+        %thead
+          %th INDEX NAME
+          %th SEQ
+          %th META SEQ
+          %th
+        %tbody
+          - if !@indices.nil? then
+            - @indices.each do |index|
+              %tr
+                %td
+                  = index.name
+                %td
+                  = index.seq
+                %td
+                  = index.meta_seqs
+                %td
+      .row#index.hidden-element
+        %input{type: "text", placeholder: "default value", class: "height-38", id: "index-name"}
+        %span#index-select
+          %select#index-select-box{ "multiple" => "multiple"}
+        %span
+          %button{ id: "btn-label-add-idx", class: "btn btn-sm btn-primary" } add index
+
+
+      %hr
+      %h4 label options
+      %hr
+      %div.form-group.string.optional.is-directed
+        %label.string.optional.contol-label{ "for" => "is_directed"}
+          %abbr{ "title" => "required"}
+            *
+          is directed
+        %div.form-radio
+          - directed = if @label.is_directed.nil? then 1 else @label.is_directed end
+          - isTrue = if directed == 1 then "checked" else nil end
+          - isFalse = if directed == 0 then "checked" else nil end
+          %input{type:"radio", value: 1, "checked" => isTrue, name: "label[is_directed]", :disabled => true}
+            true
+          %span.blank-span
+          %input{type:"radio", value: 0, "checked" => isFalse, name: "label[is_directed]", :disabled => true}
+            false
+      %div.form-group.string.optional.consistency-level
+        %label.string.optional.contol-label{ "for" => "consistency_level"}
+          %abbr{ "title" => "required"}
+            *
+          consistency level
+        %div.form-radio
+          - consistencyLevel = if @label.consistency_level.nil? then "strong" else @label.consistency_level end
+          - isStrong = if consistencyLevel == "strong" then "checked" else nil end
+          - isWeak = if consistencyLevel == "weak" then "checked" else nil end
+          %input{type:"radio", value: "strong", "checked" => isStrong, name: "label[consistency_level]", :disabled => true}
+            strong
+          %span.blank-span
+          %input{type:"radio", value: "weak", "checked" => isWeak, name: "label[consistency_level]", :disabled => true}
+            weak
+      = f.input :hbase_table_name, id: "label-form-htable-name", :label => "hbase table name", input_html: { value: @hbase_table_name }
+      = f.input :hbase_table_ttl, :label => "hbase table ttl", :disabled => true
+      = f.input :schema_version,  :label => "schema version", :disabled => true, input_html: { value: @label.schema_version, name: 'label[schema_version]'}, required: true
+      = f.input :schema_version, as: :hidden, input_html: { value: @label.schema_version, name: 'label[schema_version]'}
+      %div.form-group.string.optional.is-async
+        %label.string.optional.contol-label{ "for" => "is_async"}
+          %abbr{ "title" => "required"}
+            *
+          is async
+        %div.form-radio
+          - async = if @label.is_async.nil? then 0 else @label.is_async end
+          - isF = if async == 0 then "checked" else nil end
+          - isT = if async == 1 then "checked" else nil end
+          %input{type:"radio", value: 0, "checked" => isF, name: "label[is_async]"}
+            false
+          %span.blank-span
+          %input{type:"radio", value: 1, "checked" => isT, name: "label[is_async]"}
+            true
+      %div.form-group.string.optional.compressionAlgorithm
+        %label.string.optional.contol-label{ "for" => "compressionAlgorithm"}
+          %abbr{ "title" => "required"}
+            *
+          compression algorithm
+        %div.form-radio
+          - compression = if @label.compressionAlgorithm.nil? then "lz4" else @label.compressionAlgorithm end
+          - isLZ4 = if compression == "lz4" then "checked" else nil end
+          - isGZ = if compression == "gz" then "checked" else nil end
+          %input{type:"radio", value: 'lz4', "checked" => isLZ4, name: "label[compressionAlgorithm]", :disabled => true}
+            lz4
+          %span.blank-span
+          %input{type:"radio", value: 'gz', "checked" => isGZ, name: "label[compressionAlgorithm]", :disabled => true}
+            gz
+
+    .form-actions
+      = f.button :submit, :class => 'btn btn-primary'

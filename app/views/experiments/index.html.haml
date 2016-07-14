@@ -1,0 +1,37 @@
+%p#notice= notice
+%h3 S2AB
+#s2admin-contents-layout
+  .row
+  .col-md-12.btn-create
+    = button_to 'CREATE TEST', new_experiment_path, class: "btn btn-primary", method: :get
+  .row
+    %div{class: "form-group pull-right"}
+      %input{type:"text", class:"search form-control", placeholder:"search", autofocus: true}
+    %span{class: "counter pull-right"}
+    %table.table.table-hover.tablesorter.results
+      %thead
+        %th ID
+        %th SERVICE NAME
+        %th TEST NAME
+        %th DESCRIPTION
+        %th TEST TYPE
+        %th TOTAL MODULAR
+        %th UPDATED BY
+        %th UPDATED AT
+      %tbody
+        - @exps.each do |exp|
+          %tr{onClick: "location.href='/experiments/#{exp.id}/detail'", style: "cursor:pointer;"}
+            %td= exp.id
+            %td{:title => "S2Graph Service Name"}= exp.service_name
+            %td= exp.name
+            %td= exp.description
+            %td{:title => "U:User Based Test/T:Traffic Based Test"}
+              = exp.experiment_type
+            %td= exp.total_modular
+            %td
+              = exp.updated_by.presence || exp.created_by.presence || ''
+            %td
+              = exp.updated_at.present? ? exp.updated_at.strftime("%Y-%m-%d %H:%M") : exp.created_at.present? ? exp.created_at.strftime("%Y-%m-%d %H:%M") : ''
+  .row
+  .col-md-12.btn-create
+    = button_to 'CREATE TEST', new_experiment_path, class: "btn btn-primary", method: :get

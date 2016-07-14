@@ -1,0 +1,9 @@
+= simple_form_for @user, html: { name: "user-form", onsubmit: "return validateUserForm()"} do |f|
+  = f.error_notification
+
+  .form-wrap
+    .form-inputs.form
+      = f.input :email, :label => "e-mail", required: true, input_html: {placeholder: "Use a comma between e-mails"}
+      = f.input :authority, :label => "authority"
+    .form-actions
+      = f.button :submit, :class => 'btn btn-primary'

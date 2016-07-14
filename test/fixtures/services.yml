@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  service_name: MyString
+  access_token: MyString
+  cluster: MyString
+  hbase_table_name: MyString
+  pre_split_size: 1
+  hbase_table_ttl: 1
+
+two:
+  service_name: MyString
+  access_token: MyString
+  cluster: MyString
+  hbase_table_name: MyString
+  pre_split_size: 1
+  hbase_table_ttl: 1

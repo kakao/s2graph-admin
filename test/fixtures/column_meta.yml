@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  column_id: 
+  name: MyString
+  seq: 1
+  data_type: MyString
+
+two:
+  column_id: 
+  name: MyString
+  seq: 1
+  data_type: MyString

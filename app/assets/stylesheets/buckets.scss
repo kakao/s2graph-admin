@@ -1,0 +1,34 @@
+// Place all the styles related to the Authorities controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+
+.form-btn-wrap{
+  text-align: right;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#validate-data{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#notice-bucket-check{
+  padding: 5px;
+}
+
+#bucket-check-wraper{
+    width: 100%;
+    text-align: right;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#ace_code {
+  border: 1px solid #a9a9a9;
+  text-align: left;
+  min-height: 700px;
+  width: 1024px;
+}

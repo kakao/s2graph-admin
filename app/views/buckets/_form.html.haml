@@ -1,0 +1,57 @@
+= simple_form_for @bucket, html: { name: "bucket-form", onsubmit: "return validateBucketForm(#{@bucket.id})"} do |f|
+  = f.error_notification
+  .form-wrap
+    .form-inputs.form
+      = f.input :experiment,  :label => "experiment", :disabled => true, input_html: { value: @experiment_name, name: 'bucket[experiment_id_hidden]'}, required: true
+      = f.input :experiment, as: :hidden, input_html: { value: @experiment_id, name: 'bucket[experiment_id]'}
+      = f.input :impression_id, :label => "impression id", required: true
+      - if @bucket.id.nil?
+        %div#bucket-check-wraper
+          %span#notice-bucket-check
+          %button{ id: "btn-bucket-check-duplicate", class: "btn btn-sm btn-warning" } check duplicate
+      = f.input :modular, :label => "modular", :disabled => true, input_html: { value: @bucket.modular.presence || '0~0' , name: 'bucket[modular_hidden]'}, required: true
+      = f.input :modular, as: :hidden, input_html: { value: @bucket.modular.presence || '0~0' , name: 'bucket[modular]'}
+      = f.input :http_verb, :label => "http verb", input_html: { value: 'POST' }, required: true
+      = f.input :api_path, :label => "api path", input_html: { value: @bucket.api_path.presence || @graph_url }, required: true, :label_html => { :class => "top" }
+      = f.input :request_body, label: "request body", required: true, label_html: { class: "top"}, input_html: { style: 'display: none;' }
+      %div#ace_code
+      %div.form-btn-wrap
+        %button.btn.btn-primary{ id: "btn-reqbody-check"} validation check
+      #validate-data
+      = f.input :timeout, :label => "timeout", required: true
+
+      .form-group.string.optional.is_graph_query
+        %label.string.optional.control-label{:for => "is_graph_query"}
+          %abbr{:title => "required"} *
+          is_graph_query
+        .form-radio
+          - isTrue = if @bucket.is_graph_query == 1 then 'checked=checked' end
+          - isFalse = if @bucket.is_graph_query == 0 then 'checked=checked' end
+          %input#is_graph_query_1{:type => "radio", value: 1, "checked" => isTrue, name: "bucket[is_graph_query]"} true
+          %span.blank-span
+          %input#is_graph_query_0{:type => "radio", value: 0, "checked" => isFalse, name: "bucket[is_graph_query]"} false
+      .form-group.string.optional.is_empty_bucket
+        %label.string.optional.control-label{:for => "is_empty_bucket"}
+          %abbr{:title => "required"} *
+          is_empty_bucket
+        .form-radio
+          - isTrue = if @bucket.is_empty == 1 then 'checked=checked' end
+          - isFalse = if @bucket.is_empty == 0 then 'checked=checked' end
+          %input#is_empty_bucket_1{:type => "radio", value: 1, "checked" => isTrue, name: "bucket[is_empty]"} true
+          %span.blank-span
+          %input#is_empty_bucket_0{:type => "radio", value: 0, "checked" => isFalse, name: "bucket[is_empty]"} false
+      = f.input :description, label: "description"
+
+      .form-actions
+        = f.button :submit, class: "btn btn-primary"
+
+
+      %div{id: "result-modal", class: "modal fade", "role" => "dialog"}
+        %div{class: "modal-dialog modal-lg"}
+          %div{class: "modal-content"}
+            %div{class: "modal-header"}
+              %h4{class: "modal-title", id: "result-modal-title"}
+            %div{class: "modal-body"}
+              %pre.contents-value#result-modal-contents
+            %div{class: "modal-footer"}
+              %button{type: "button", class: "btn btn-default", "data-dismiss" => "modal"}Close

@@ -1,0 +1,32 @@
+%p#notice= notice
+%p
+  %strong Experiment:
+  = @bucket.experiment_id
+%p
+  %strong Traffic ratios:
+  = @bucket.modular
+%p
+  %strong Http verb:
+  = @bucket.http_verb
+%p
+  %strong Api path:
+  = @bucket.api_path
+%p
+  %strong Request body:
+  = @bucket.request_body
+%p
+  %strong Timeout:
+  = @bucket.timeout
+%p
+  %strong Impression:
+  = @bucket.impression_id
+%p
+  %strong Is graph query:
+  = @bucket.is_graph_query
+%p
+  %strong Is empty bucket:
+  = @bucket.is_empty
+
+= link_to 'Edit', edit_bucket_path(@bucket)
+|
+\#{link_to 'Back', "/experiments/#{@bucket.experiment_id}/detail"}

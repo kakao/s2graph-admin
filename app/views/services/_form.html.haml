@@ -1,0 +1,16 @@
+= simple_form_for @service, html: { name: "service-form", onsubmit: "return validateServiceForm()"} do |f|
+  = f.error_notification
+
+
+  .form-wrap
+    .form-inputs.form
+      = f.input :service_name, label: "service name", required: true
+      = f.input :access_token, label: "access token", required: true, disabled: true, input_html: { name: 'service[access_token_diabled]', id: "service_access_token_disabled"}
+      = f.input :access_token, as: :hidden, id: "access_token_input", input_html: { name: 'service[access_token]'}
+      = f.input :cluster, :label => "cluster", disabled: true, input_html: { value: APP_CONFIG['cluster']}, required: true, input_html: { value: APP_CONFIG['cluster'], name: 'service[cluster_disabled]'}
+      = f.input :cluster, as: :hidden, input_html: { value: APP_CONFIG['cluster']}
+      = f.input :hbase_table_name, label: "hbase table name", required: true
+      = f.input :pre_split_size, label: "pre split size"
+      = f.input :hbase_table_ttl, label: "hbase table ttl"
+    .form-actions
+      = f.button :submit, :class => 'btn btn-primary'

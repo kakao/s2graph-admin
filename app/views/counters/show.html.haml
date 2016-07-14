@@ -1,0 +1,67 @@
+%p#notice= notice
+%div.row
+  .col-md-12
+    .row#counter-title-wrapper
+      .col-md-12#counter-title
+        %span
+          = @counter.service
+          |
+        %span
+          = @counter.action
+        %span{id: 'counter-id'}
+          = @counter.id
+        %span{id: 'counter-modify', class: 'glyphicon glyphicon-pencil', 'aria-hidden': 'true'}
+    %hr
+    .row.counter-div
+      .row.counter-field
+        .col-md-6.counter-contents-div.right-align use flag :
+        %span.col-md-6.counter-boolean-contents-div #{@counter.use_flag}
+      .row.counter-field
+        .col-md-6.counter-contents-div.right-align version :
+        .col-md-6.counter-contents-div #{@counter.version}
+      .row.counter-field
+        .col-md-6.counter-contents-div.right-align item type :
+        .col-md-6.counter-contents-div #{@counter.item_type}
+      .row.counter-field
+        .col-md-6.counter-contents-div.right-align auto comb :
+        .col-md-6.counter-boolean-contents-div #{@counter.auto_comb}
+      .row.counter-field
+        .col-md-6.counter-contents-div.right-align dimension :
+        .col-md-6.counter-contents-div #{@counter.dimension}
+      .row.counter-field
+        .col-md-6.counter-contents-div.right-align use profile :
+        .col-md-6.counter-boolean-contents-div #{@counter.use_profile}
+      .row.counter-field
+        .col-md-6.counter-contents-div.right-align bucket imp id :
+        .col-md-6.counter-contents-div #{@counter.bucket_imp_id}
+      .row.counter-field
+        .col-md-6.counter-contents-div.right-align use exact :
+        .col-md-6.counter-boolean-contents-div #{@counter.use_exact}
+      .row.counter-field
+        .col-md-6.counter-contents-div.right-align use rank :
+        .col-md-6.counter-boolean-contents-div #{@counter.use_rank}
+      .row.counter-field
+        .col-md-6.counter-contents-div.right-align ttl :
+        .col-md-6.counter-contents-div #{@counter.ttl}
+      .row.counter-field
+        .col-md-6.counter-contents-div.right-align daily ttl :
+        .col-md-6.counter-contents-div #{@counter.daily_ttl}
+      .row.counter-field
+        .col-md-6.counter-contents-div.right-align hbase table :
+        .col-md-6.counter-contents-div #{@counter.hbase_table}
+      .row.counter-field
+        .col-md-6.counter-contents-div.right-align interval unit :
+        .col-md-6.counter-contents-div #{@counter.interval_unit}
+      .row.counter-field
+        .col-md-6.counter-contents-div.right-align rate action :
+        .col-md-6.counter-contents-div
+          - unless @counter.rate_action_id.blank?
+            %pre.contents-value.json-body=JSON.pretty_generate(Counter.select(:id, :service, :action).where(id: @counter.rate_action_id).take.as_json)
+      .row.counter-field
+        .col-md-6.counter-contents-div.right-align rate base :
+        .col-md-6.counter-contents-div
+          - unless @counter.rate_base_id.blank?
+            %pre.contents-value.json-body=JSON.pretty_generate(Counter.select(:id, :service, :action).where(id: @counter.rate_base_id).take.as_json)
+      .row.counter-field
+        .col-md-6.counter-contents-div.right-align rate threshold :
+        .col-md-6.counter-contents-div #{@counter.rate_threshold}

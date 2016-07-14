@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  service_id: 
+  column_name: MyString
+  column_type: MyString
+  schema_version: MyString
+
+two:
+  service_id: 
+  column_name: MyString
+  column_type: MyString
+  schema_version: MyString

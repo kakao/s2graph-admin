@@ -1,0 +1,26 @@
+= simple_form_for @counter, html: { name: "authority-form", onsubmit: "return validateCounterForm()"} do |f|
+	= f.error_notification
+	.form-wrap
+		.form-inputs.form
+			= f.input :version, label: "version", :disabled => true, input_html: { value: @version, name: 'counter[version]]'}, required: true
+			= f.input :version, as: :hidden, input_html: { value: @version, name: 'counter[version]'}
+			= f.input :service, collection: Service.all.order(:service_name), label_method: :service_name, value_method: :service_name, :label => "service name", required: true
+			= f.input :action, collection: Label.all.order(:label), label_method: :label, value_method: :label, label: "action", required: true
+			/ = f.input :item_type, collection: [['integer', 0], ['long', 1], ['string', 2]],  label: "item type"
+			= f.input :dimension, label: "dimension"
+			= f.input :bucket_imp_id, label: "bucket imp id"
+			/ = f.input :ttl, label: "ttl"
+			= f.input :daily_ttl, label: "daily ttl"
+			/ = f.input :hbase_table, label: "hbase table"
+			= f.input :interval_unit, label: "interval unit"
+			- counters = Counter.where(use_flag: 1).order(:service, :action)
+			= f.input :rate_action_id, collection: counters.order(:action), label_method: :action, value_method: :id, label: "rate action id"
+			= f.input :rate_base_id, collection: counters.order(:action), label_method: :action, value_method: :id, label: "rate base id"
+			= f.input :rate_threshold, label: "rate threshold"
+			= f.input :use_flag, label: "use flag", label_html: { :class => "input-flag"}
+			= f.input :auto_comb, label: "auto comb", label_html: { :class => "input-flag"}
+			= f.input :use_profile, label: "use profile", label_html: { :class => "input-flag"}
+			/ = f.input :use_exact, label: "use exact", label_html: { :class => "input-flag"}
+			= f.input :use_rank, label: "use rank", label_html: { :class => "input-flag"}
+	.form-actions
+		= f.button :submit, :class => 'btn btn-primary'

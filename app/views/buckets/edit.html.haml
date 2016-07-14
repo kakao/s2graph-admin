@@ -1,0 +1,9 @@
+%h3 EDITING BUCKET
+#s2admin-form-layout
+	= render 'form'
+	= link_to 'Show', @bucket
+	|
+	\#{link_to 'Back', "/experiments/#{@bucket.experiment_id}/detail"}
+
+:javascript
+	var isEditMode=true;

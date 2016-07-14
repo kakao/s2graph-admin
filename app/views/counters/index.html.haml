@@ -1,0 +1,38 @@
+%p#notice= notice
+%h3 S2COUNTER
+#s2admin-contents-layout
+  .row
+  .col-md-12.btn-create
+    = button_to 'CREATE COUNTER', new_counter_path, class: "btn btn-primary", method: :get
+  .row
+    %div{class: "form-group pull-right"}
+      %input{type:"text", class:"search form-control", placeholder:"search"}
+    %span{class: "counter pull-right"}
+    %table.table.table-hover.tablesorter.results
+      %thead
+        %tr
+          %th ID
+          %th USE FLAG
+          %th SERVICE
+          %th ACTION
+          %th AUTO COMB
+          %th DIMENSION
+          %th USE EXACT
+          %th USE RANK
+          %th INTERVAL UNIT
+
+      %tbody
+        - @counters.each do |counter|
+          %tr{onClick: "location.href='/counters/#{counter.id}'", style: "cursor:pointer;"}
+            %td= counter.id
+            %td= counter.use_flag
+            %td= counter.service
+            %td= counter.action
+            %td= counter.auto_comb
+            %td= counter.dimension
+            %td= counter.use_exact
+            %td= counter.use_rank
+            %td= counter.interval_unit
+  .row
+  .col-md-12.btn-create
+    = button_to 'CREATE COUNTER', new_counter_path, class: "btn btn-primary", method: :get
