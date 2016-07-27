@@ -14,7 +14,7 @@ S2Graph is required for s2graph-admin.
 Please install S2Graph before follow step.
 
 ```sh
-git clone https://github.daumkakao.com/rain-y/s2graph-admin
+git clone https://github.com/kakao/s2graph-admin
 ```
 ```sh
 rails s
