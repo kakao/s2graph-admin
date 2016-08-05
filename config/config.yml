@@ -4,6 +4,7 @@ defaults: &default
   cluster: 'localhost'
   compression_algorithm: 'gz'
   email_postfix: '@yourcompany.com'
+  auth_url: ''
 
 alpha: &alpha
   <<: *default
